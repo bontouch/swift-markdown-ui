@@ -1,4 +1,4 @@
-// swift-tools-version:5.6
+// swift-tools-version:5.9
 
 import PackageDescription
 
@@ -6,8 +6,8 @@ let package = Package(
   name: "swift-markdown-ui",
   platforms: [
     .macOS(.v12),
-    .iOS(.v15),
-    .tvOS(.v15),
+    .iOS(.v16),
+    .tvOS(.v16),
     .macCatalyst(.v15),
     .watchOS(.v8),
   ],
@@ -18,7 +18,6 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(url: "https://github.com/gonzalezreal/NetworkImage", from: "6.0.0"),
     .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.10.0"),
   ],
   targets: [
@@ -27,7 +26,6 @@ let package = Package(
       name: "MarkdownUI",
       dependencies: [
         "cmark-gfm",
-        .product(name: "NetworkImage", package: "NetworkImage"),
       ]
     ),
     .testTarget(

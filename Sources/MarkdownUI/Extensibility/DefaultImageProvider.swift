@@ -1,18 +1,20 @@
-import NetworkImage
 import SwiftUI
 
 /// The default image provider, which loads images from the network.
 public struct DefaultImageProvider: ImageProvider {
   public func makeImage(url: URL?) -> some View {
-    NetworkImage(url: url) { state in
+    AsyncImage(url: url) { state in
       switch state {
+      case .success(let image):
+        ResizeToFit {
+          image.resizable()
+        }
       case .empty, .failure:
         Color.clear
           .frame(width: 0, height: 0)
-      case .success(let image, let idealSize):
-        ResizeToFit(idealSize: idealSize) {
-          image.resizable()
-        }
+      @unknown default:
+        Color.clear
+          .frame(width: 0, height: 0)
       }
     }
   }
